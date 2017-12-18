@@ -297,7 +297,6 @@
 
     function init() {
         task_list = store.get('task_list') || [];
-        console.log(task_list)
         if (task_list.length) {
             render_task_list();
         }
