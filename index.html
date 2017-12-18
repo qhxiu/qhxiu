@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+    <link rel="stylesheet" href="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="css/todo.css">
+</head>
+<body>
+<div class="msg">
+    <span class="msg-content"></span>
+    <span class="anchor confirmed">知道了</span>
+</div>
+<div class="container">
+    <h1>我的Todo</h1>
+    <form class="add-task">
+        <input name="todo" type="text" placeholder="e.g. 学习" autofocus autocomplete="off">
+        <button type="submit">submit</button>
+    </form>
+    <div class="task-list"></div>
+    <div class="task-detail-mask" style="display: none"></div>
+    <div class="task-detail" style="display: none">
+
+    </div>
+</div>
+<video class="alert" src="alert.mp3"></video>
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js"></script>
+<script src="node_modules/store/store.js"></script>
+<script src="js/todo.js"></script>
+</body>
+</html>
