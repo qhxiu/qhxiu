@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li {
+            list-style-type: decimal;
+        }
+        a {
+            text-decoration: none;
+        }
+        .container {
+            width: 520px;
+            margin:10px auto;
+            border: 1px solid #aaa;
+        }
+        .container ol {
+            margin: 20px 20px 10px 20px;
+            font-size: 20px;
+            padding: 0 40px;
+        }
+        .container li {
+
+        }
+        .container a {
+            display: block;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #0a8dc2;
+            font-weight: bold;
+            border-bottom: 1px solid #f2f2f2;
+            transition: .5s;
+        }
+        .container a.hover {
+            color: #fff;
+            background: #57af57;
+            border-radius: 5px;
+            padding-left: 20px;
+        }
+        .sub-list {
+            display: none;
+            padding-left: 18px;
+        }
+        .sub-list li {
+            list-style-type: none;
+
+        }
+        .sub-list a {
+            font-weight: normal;
+        }
+        .sub-list a:hover {
+            color: #fff;
+            background: #57af57;
+            border-radius: 5px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ol>
+            <li>
+                <a class="list" href="javascript:;">第一章</a>
+                <ul class="sub-list">
+                    <li><a href="chapter1/control.html">控制DIV属性</a></li>
+                    <li><a href="chapter1/changeBackground.html">网页换肤</a></li>
+                    <li><a href="chapter1/accept.html">函数接收参数并弹出</a></li>
+                    <li><a href="chapter1/for-changeColor.html">用循环将三个DIV变成红色</a></li>
+                    <li><a href="chapter1/onmouse.html">鼠标移入移除改变样式</a></li>
+                    <li><a href="chapter1/password-tip.html">记住密码提示框</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="list" href="javascript:;">第二章</a>
+                <ul class="sub-list">
+                    <li><a href="chapter2/input.html">百度输入法</a></li>
+                    <li><a href="chapter2/click-div.html">点击DIV，显示其innerHTML</a></li>
+                    <li><a href="chapter2/add.html">求出数组中所有数字的和</a></li>
+                    <li><a href="chapter2/layer.html">弹出层效果</a></li>
+                    <li><a href="chapter2/changeAttribute.html">函数传参，改变DIV任意属性的值</a></li>
+                    <li><a href="chapter2/imgOpacity.html">图片列表：鼠标移入移出改变图片透明度</a></li>
+                    <li><a href="chapter2/tab.html">简易选项卡</a></li>
+                    <li><a href="chapter2/calendar.html">简易JS年历</a></li>
+                    <li><a href="chapter2/list-hide.html">单一按钮显示/隐藏播放列表</a></li>
+                    <li><a href="chapter2/car-display.html">提示框效果</a></li>
+                    <li><a href="chapter2/changeImgSrc.html">鼠标移过，修改图片路径</a></li>
+                    <li><a href="chapter2/checkbox.html">复选框全选/全不选/反选</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="list" href="javascript:;">第三章</a>
+                <ul class="sub-list">
+                    <li><a href="chapter3/parseInt.html">用parseInt解析数据,并求和</a></li>
+                    <li><a href="chapter3/increase.html">累加按钮，自加1</a></li>
+                    <li><a href="chapter3/two-num.html">输入两个数字,比较大小</a></li>
+                    <li><a href="chapter3/auto-increased.html">页面加载后累加,自加1</a></li>
+                    <li><a href="chapter3/two-num.html">判断数字是否为两位数</a></li>
+                    <li><a href="chapter3/Calculator.html">网页计算器</a></li>
+                    <li><a href="chapter3/clock.html">简易网页时钟</a></li>
+                    <li><a href="chapter3/countDown.html">倒计时时钟</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="list" href="javascript:;">第四章</a>
+                <ul class="sub-list">
+                    <li><a href="chapter4/1-nav.html">setTimeout应用</a></li>
+                    <li><a href="chapter4/2-autoPlay.html">自动播放</a></li>
+                    <li><a href="chapter4/3-autoPlay-changeDirection.html">自动改变方向</a></li>
+                    <li><a href="chapter4/4-arguments.html">arguments应用-求出函数参数的总和</a></li>
+                    <li><a href="chapter4/5-object-attr.html">css函数－设置/读取对象的属性</a></li>
+                    <li><a href="chapter4/6-input-highlight.html">当前输入框高亮显示</a></li>
+                    <li><a href="chapter4/7-array.html">数组练习</a></li>
+                    <li><a href="chapter4/8-event.html">事件练习</a></li>
+                    <li><a href="chapter4/9-star.html">星级评分系统</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="list" href="javascript:;">第五章</a>
+                <ul class="sub-list">
+                    <li><a href="chapter5/1-select.html">模拟select空间</a></li>
+                    <li><a href="chapter5/2-coordinate.html">点击页面,显示单击的坐标</a></li>
+                    <li><a href="chapter5/3-keyCode.html">用户按下键盘,显示keyCode</a></li>
+                    <li><a href="chapter5/4-contextmenu.html">阻止右键菜单</a></li>
+                    <li><a href="chapter5/5-mouseMove.html">跟随鼠标移动</a></li>
+                    <li><a href="chapter5/6-myself-contextmenu.html">自定义右键菜单</a></li>
+                    <li><a href="chapter5/7-keydown.html">用键盘控制div</a></li>
+                    <li><a href="chapter5/8-shark.html">div闪烁</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="list" href="javascript:;">第六章</a>
+                <ul class="sub-list">
+                    <li><a href="chapter6/1-drag.html">完美拖拽</a></li>
+                    <li><a href="chapter6/2-tencent-wb.html">仿腾讯微博效果</a></li>
+                    <li><a href="chapter6/3-multi-menu.html">自定义多级右键菜单</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+<script>
+    window.onload = function () {
+        var oA = document.getElementsByClassName('list');
+        var timer = null, flag = [false, false, false, false];
+        var list = document.getElementsByClassName('ul');
+
+
+
+        for (var i=0; i<oA.length; i++) {
+            oA[i].index = i;
+            oA[i].onmouseover = function () {
+                this.className = 'hover';
+                return false;
+            };
+            oA[i].onmouseout = function () {
+                this.className = '';
+            };
+            oA[i].onclick = function () {
+                hideUl(this.index);
+                f(this.index);
+                if (flag[this.index]) {
+                    this.parentNode.getElementsByTagName('ul')[0].style.display = 'none';
+                    flag[this.index] = !flag[this.index];
+                } else {
+                    this.parentNode.getElementsByTagName('ul')[0].style.display = 'block';
+                    flag[this.index] = !flag[this.index];
+                }
+            }
+        }
+
+        function hideUl(index) {
+            var oUl = document.getElementsByTagName('ul');
+            for (var i=0; i<oUl.length; i++) {
+                oUl[i].style.display = 'none';
+            }
+        }
+        function f(index) {
+            var a = flag.slice(0, index);
+            var b = flag.slice(index+1);
+
+            for (var i=0; i<a.length; i++) {
+                a[i] = false;
+            }
+            for (var i=0; i<b.length; i++) {
+                b[i] = false;
+            }
+            a[index] = true;
+        }
+    }
+</script>
+</body>
+</html>

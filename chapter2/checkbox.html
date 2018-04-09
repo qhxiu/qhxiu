@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 100px;
+            border: 1px solid #000;
+        }
+        .title {
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #000;
+        }
+        p {
+            display: inline-block;
+        }
+        input {}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <input id="selectAll" onclick="selectAll()" type="checkbox" name="choose" />全选
+            <p onclick="selectOther()">反选</p>
+        </div>
+        <label for="option">
+            <input type="checkbox" name="option" value="one" />选项(一)<br>
+            <input type="checkbox" name="option" value="two" />选项(二)<br>
+            <input type="checkbox" name="option" value="three" />选项(三)<br>
+            <input type="checkbox" name="option" value="four" />选项(四)<br>
+            <input type="checkbox" name="option" value="five" />选项(五)<br>
+            <input type="checkbox" name="option" value="six" />选项(六)<br>
+        </label>
+    </div>
+
+<script>
+    //var selectAll = document.getElementById('selectAll');
+    var option = document.getElementsByName('option');
+
+    function isSelectAll() {
+        for (var i=0; i<option.length; i++) {
+            if (!option[i].checked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function selectAll() {
+        if (isSelectAll()) {
+            for (var i=0; i<option.length; i++) {
+                option[i].checked = false;
+            }
+        } else {
+            for (var i=0; i<option.length; i++) {
+                option[i].checked = true;
+            }
+        }
+    }
+
+    function selectOther() {
+        for (var i=0; i<option.length; i++) {
+            if (option[i].checked) {
+                option[i].checked = false;
+            } else {
+                option[i].checked = true;
+            }
+        }
+    }
+</script>
+</body>
+</html>

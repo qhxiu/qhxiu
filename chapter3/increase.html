@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <input id="num" type="button" onclick="increase()" value=0>
+
+<script>
+    function increase() {
+        var num = document.getElementById('num');
+        num.value = parseInt(num.value) + 1;
+    }
+</script>
+</body>
+</html>

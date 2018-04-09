@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 400px;
+            margin:0 auto;
+        }
+        p {
+            display: inline-block;
+        }
+        input {
+            margin-left: 10px;
+        }
+        .btn {
+            margin-left: 50px;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            color: #000;
+            margin-top: 10px;
+        }
+        .addbox {
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>属性名:</p><input id="input1" type="text" value="color"> <br>
+    <p>属性值:</p><input id="input2" type="text" value="yellow"> <br>
+    <button id="confirm" class="btn">确定</button>
+    <button id="restart">重置</button>
+    <div id="box" class="box addbox">
+        <p class="">在上方输入框输入"属性名"及"属性值",点击确定按钮查看效果</p>
+    </div>
+</div>
+
+<script>
+    var input = document.getElementById('input1'),
+        val = document.getElementById('input2'),
+        confirm = document.getElementById('confirm'),
+        restart = document.getElementById('restart'),
+        box = document.getElementById('box'),
+        style = document.getElementsByTagName('style')[0];
+
+    confirm.addEventListener('click', function () {
+        var attrName = input.value;
+        var attrValue = val.value;
+        box.setAttribute('style', attrName+':'+attrValue);
+    });
+    restart.addEventListener('click', function () {
+        box.setAttribute('style', '');
+    })
+    
+
+
+</script>
+</body>
+</html>

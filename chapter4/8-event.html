@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        pre {
+            background-color: #eee;
+            color: green;
+            padding: 10px 15px;
+            border: 1px dotted #222;
+            line-height: 18px;
+            font-family: "Courier New";
+        }
+        .btns {
+            /*width: 200px;*/
+            /*margin:10px auto;*/
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<pre class="code">
+&lt;script&gt;
+var EventUtil = {
+        addHandler: function (oElement, sEvent, fnHandler) {
+                oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent('on' + sEvent, fnHandler)
+        },
+        removeHandler: function (oElement, sEvent, fnHandler) {
+                oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler. false) : oElement.detachEvent('on' + sEvent, fnHandler)
+        },
+        addLoadHandler: function (fnHandler) {
+                this.addHandler(window, "load", fnHandler)
+        }
+}
+&lt;/script&gt;
+</pre>
+<div id="btns" class="btns">
+    <button name="btn" id="myBtn">毫无用处的按钮</button>
+    <button>绑定click</button>
+    <button>解除绑定</button>
+</div>
+
+<script>
+    var EventUtil = {
+        addHandler: function (oElement, sEvent, fnHandler) {
+            oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent('on' + sEvent, fnHandler)
+        },
+        removeHandler: function (oElement, sEvent, fnHandler) {
+            oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, false) : oElement.detachEvent('on' + sEvent, fnHandler)
+        },
+        addLoadHandler: function (fnHandler) {
+            // 初始化加载函数fnHandler
+            this.addHandler(window, "load", fnHandler)
+        }
+    };
+
+
+    EventUtil.addLoadHandler(function () {
+        var btns = document.getElementsByTagName('button');
+
+        function handler() {
+            alert('事件绑定成功')
+        }
+
+        EventUtil.addHandler(btns[1],'click', function () {
+            EventUtil.addHandler(btns[0], 'click', handler);
+            btns[0].innerText = '我可以点击了'
+        });
+
+        EventUtil.addHandler(btns[2], 'click', function () {
+            EventUtil.removeHandler(btns[0], 'click', handler);
+            btns[0].innerText = '毫无用处的按钮'
+        })
+    })
+</script>
+</body>
+</html>

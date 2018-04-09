@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        pre {
+            background-color: #dddddd;
+            padding: 10px 15px;
+            border: 1px dotted #000;
+            color: green;
+            line-height: 18px;
+            font: 12px/1.5 Courier New;
+        }
+        p {
+            width: 390px;
+            margin: 0 auto;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<pre>
+&lt;script&gt;
+window.onload = function () {
+    var oP = document.getElementsByTagName('p')[0];
+    document.onkeydown = function (event) {
+        var event = event || window.event;
+        oP.innerHTML = event.keyCode;
+        return;
+    }
+}
+</pre>
+<p>这里将显示您按下的 keyCode</p>
+<script>
+    window.onload = function () {
+        var oP = document.getElementsByTagName('p')[0];
+        document.onkeydown = function (event) {
+            var event = event || window.event;
+            oP.innerHTML = event.keyCode;
+            return;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #000;
+        }
+        .container {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            margin: 0 auto;
+            border: 5px solid #fff;
+            border-radius: 3px;
+            background: #fff;
+        }
+        ul {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            margin:0;
+            padding: 0;
+        }
+        li {
+            position: absolute;
+            /*display: none;*/
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+        li.current {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+        img {
+            width: 400px;
+            height: 200px;
+        }
+        .num {
+            position: absolute;
+            bottom: 1px;
+            right: 1px;
+            overflow: hidden;
+        }
+        .num span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 14px;
+            background-color: #d58512;
+            text-align: center;
+        }
+        .num span.current {
+            color: #fff;
+            opacity: 1;
+            filter: alpha(opacity=100);
+            background: #f60;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul id="slider">
+        <li class="current"><a href=""><img src="images/1.jpg"></a></li>
+        <li><a href=""><img src="images/2.jpg"></a></li>
+        <li><a href=""><img src="images/3.jpg"></a></li>
+        <li><a href=""><img src="images/4.jpg"></a></li>
+        <li><a href=""><img src="images/5.jpg"></a></li>
+    </ul>
+    <div id="num" class="num">
+        <span class="current" onmouseover="sli(this)">1</span>
+        <span onmouseover="sli(this)">2</span>
+        <span onmouseover="sli(this)">3</span>
+        <span onmouseover="sli(this)">4</span>
+        <span onmouseover="sli(this)">5</span>
+    </div>
+</div>
+
+<script>
+    var img = document.getElementById('slider').getElementsByTagName('li');
+    var num = document.getElementById('num').getElementsByTagName('span');
+    img[0].style.display = 'block';
+    num[0].style.backgroundColor = 'orange';
+    var index = 1, timer = null, play = null;
+    function autoPlay() {
+        play = setInterval(function () {
+            num_bg();
+            index > 4 && (index = 0);
+
+            img[index].style.display = 'block';
+            num[index].style.backgroundColor = 'orange';
+            show(index);
+            index++;
+        }, 2000);
+    }
+    autoPlay();
+
+    function sli(obj) {
+        index = parseInt(obj.innerText) - 1;
+        num_bg();
+        console.log(index);
+        img[index].style.display = 'block';
+        num[index].style.backgroundColor = 'orange';
+    }
+    function num_bg() {
+        for (var i=0; i<img.length; i++) {
+            img[i].style.display = 'none';
+            num[i].classname = '';
+            img[i].style.filter = "alpha(opacity=0)";
+            num[i].style.backgroundColor = '#d58512';
+        }
+    }
+    function show(a) {
+        idx = a;
+        var alpha=0;
+        //num[idx].classname = 'current';
+        clearInterval(timer);
+        timer = setInterval(function () {
+
+            alpha += 2;
+            alpha > 100 && (alpha=100);
+            img[idx].style.opacity = alpha / 100;
+            console.log(alpha/100);
+            img[idx].style.filter = "alpha(opacity="+alpha+")";
+            alpha == 100 && clearInterval(timer);
+        }, 20);
+    }
+</script>
+</body>
+</html>

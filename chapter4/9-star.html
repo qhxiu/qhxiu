@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style-type: none;
+        }
+        .container {
+            width: 400px;
+            margin: 10px auto;
+        }
+        #star ul, #star span {
+            float: left;
+            display: inline;
+            height: 19px;
+            line-height: 19px;
+        }
+        #star ul {
+            margin: 0 10px;
+        }
+        #star li {
+            float: left;
+            cursor: pointer;
+            background: url("images/star-img.png") no-repeat;
+            width: 18px;
+            text-indent: -9999px;
+            background-position: -28px -2px;
+            height: 18px;
+            padding-right: 5px;
+        }
+        #star li.on {
+            background-position: -2px -2px;
+        }
+        p {
+            display: none;
+            position: absolute;
+            top: 30px;
+            width: 159px;
+            padding: 0 10px;
+            font-style: normal;
+            background-color: #eee;
+            border: 1px solid #ddd;
+        }
+        em {
+            display: block;
+            color: orangered;
+        }
+        strong {
+            margin-left: 10px;
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div id="star" class="container">
+        <span style="font-size: 18px">点击星星就能打分</span>
+        <ul id="box" class="stars">
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+        </ul>
+        <span></span>
+        <p></p>
+    </div>
+
+<script>
+    var star = document.getElementById('star'),
+        imgs = star.getElementsByTagName('li'),
+        op = document.getElementsByTagName('p')[0],
+        box = document.getElementById('box'),
+        oSpan = document.getElementsByTagName('span')[1],
+        count = 0;
+    var aMsg = [
+        '很不满意|差的太离谱',
+        '不满意|部分有破损',
+        '一般|质量一般',
+        '满意|质量不错',
+        '非常满意|质量非常好'
+    ];
+
+    for (var i=1; i<=imgs.length; i++) {
+        imgs[i-1].index = i;
+        imgs[i-1].onmouseover = function () {
+            imgSrc(this.index);
+            op.style.display = 'block';
+            op.style.left = box.offsetLeft + this.index * this.offsetWidth - 80 + 'px';
+            op.innerHTML = '<em><b>' + this.index + '</b> 分 ' + aMsg[this.index-1].match(/(.+)\|/)[1] + '</em>' +
+                    aMsg[this.index-1].match(/\|(.+)/)[1]
+        };
+        imgs[i-1].onmouseout = function () {
+            imgSrc();
+            op.style.display = 'none';
+            console.log(1);
+        };
+        imgs[i-1].onclick = function () {
+            count = this.index;
+            op.style.display = 'none';
+            oSpan.innerHTML = '<strong>' + this.index + '分</strong> (' + aMsg[this.index-1].match(/\|(.+)/)[1] + ')';
+        };
+        function imgSrc(a) {
+            score = a || count;
+            for (var i=0; i<imgs.length; i++) {
+                imgs[i].className = i < score ?'on' : '';
+            }
+//            for (j=0; j<count; j++) {
+//                imgs[j].src = 'images/star.png'
+//            }
+        }
+    }
+</script>
+</body>
+</html>

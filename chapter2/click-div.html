@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+
+        }
+        .container div {
+            width: 400px;
+            margin:0 auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="say" onclick="cli(this)">
+            <strong>说明：</strong>其从上到下叠放次序依次为：content内容层——背景图片层——背景颜色层。上层会覆盖下层，
+            但覆盖区域大小取决于上层的实际大小（如文字仅仅占据字体的区域，背景图片仅仅覆盖图片大小的区域，
+            其它区域仍然为背景色）。padding属于背景，但margin不是。
+        </div>
+        <div onclick="cli(this)">
+            通过实践发现，背景颜色层默认并不是白色，而是透明，所以连个div重叠在一起，
+            若z-index较大的div没有设置背景颜色，且背景图片没有填满整个背景，
+            那么没有被背景图片覆盖的区域将被显示为z-index较小的div的相应背景或背景颜色。
+            所以背景颜色在重叠中起着至关重要的作用，<strong style="color:red">当背景图片没有填满整个背景时，还应该设置背景颜色为white。</strong>
+        </div>
+        <div onclick="cli(this)">
+            z-index优先在同级元素做比较，若同级元素没有指定z-index，则默认不比较，
+            但设置了z-index大于0的元素重叠在上层。
+            此时同级中设置了z-index的元素可与其它未设置z-index的同级元素的子元素比较z-index，并得出两者的重叠次序。
+            假设同级中有两个元素设置了z-index，则两个同级元素比较z-index大小，
+            此时不能跨级比较z-index（即同级中z-index小的元素，无论内部的子元素z-index有多大，
+            都会处在父级元素中z-index较大的元素的底层）
+        </div>
+    </div>
+
+<script>
+    var news = document.getElementById('news')
+
+    function cli(obj) {
+        alert(obj.innerHTML)
+    }
+
+</script>
+</body>
+</html>

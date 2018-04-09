@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 240px;
+            margin: 0 auto;
+            background-color: #000;
+            border: solid 1px transparent;
+        }
+        .result {
+            position: relative;
+            margin-top: 10px;
+            height: 80px;
+            background-color: #DCE0C5;
+        }
+        .result p {
+            display: block;
+            position: absolute;
+            right: 10px;
+        }
+        .result p:first-child {
+            right: 13px;
+        }
+        .result p:last-child {
+            top:0px;
+            font-size: 30px;
+        }
+        .btns {
+            margin: 10px 5px;
+        }
+        button {
+            width: 55px;
+            height: 40px;
+            font-size: 20px;
+            color: #fff;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+        }
+        .btns-top {
+            margin-bottom: 10px;
+        }
+        .btns-top button {
+            border: 1px solid #333;
+            background-color: #616161;
+            border-radius: 2px;
+            outline: none;
+            background: linear-gradient(to bottom, #9E938C, #645248);
+        }
+        .btns-top button:hover {
+            background: linear-gradient(to top, #fff, #645248);
+        }
+        .btns-num {
+            width: 75%;
+        }
+        .btns-num button {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, #000);
+            outline: none;
+        }
+        .btns-num button:hover {
+            background: linear-gradient(to top, #fff, #000);;
+        }
+        .btns-num button:nth-of-type(10) {
+            width: 66%;
+        }
+        .btns-right {
+            display: flex;
+            flex-direction: column;
+            float: right;
+            margin-top: -87%;
+            /*margin-right: px;*/
+        }
+        .btns-right button {
+            background: linear-gradient(to bottom, #9E938C, #645248);
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            outline: none;
+        }
+        .btns-right button:hover {
+            background: linear-gradient(to top, #9E938C, #645248);
+        }
+        .btns-right button:last-child {
+            height: 90px;
+            background: orange;
+        }
+        #evel:hover {
+            background: linear-gradient(to top, orange, #fff);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="result">
+        <p id="res"><strong></strong></p>
+        <p id="input1"><strong>0</strong></p>
+    </div>
+    <div class="btns">
+        <div class="btns-top">
+            <button onclick="command('c')"><strong>c</strong></button>
+            <button onclick="command('%')"><strong>%</strong></button>
+            <button onclick="command('÷')"><strong>÷</strong></button>
+            <button onclick="command('×')"><strong>×</strong></button>
+        </div>
+        <div id="btns-num" class="btns-num">
+            <button onclick="command(7)"><strong>7</strong></button>
+            <button onclick="command(8)"><strong>8</strong></button>
+            <button onclick="command(9)"><strong>9</strong></button>
+            <button onclick="command(4)"><strong>4</strong></button>
+            <button onclick="command(5)"><strong>5</strong></button>
+            <button onclick="command(6)"><strong>6</strong></button>
+            <button onclick="command(1)"><strong>1</strong></button>
+            <button onclick="command(2)"><strong>2</strong></button>
+            <button onclick="command(3)"><strong>3</strong></button>
+            <button onclick="command(0)"><strong>0</strong></button>
+            <button onclick="command('.')"><strong>.</strong></button>
+        </div>
+        <div class="btns-right">
+            <button onclick="command('-')"><strong>-</strong></button>
+            <button onclick="command('+')"><strong>+</strong></button>
+            <button onclick="calc()"><strong>=</strong></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var btnsNum = document.getElementsByTagName('button');
+    var input1 = document.getElementById('input1');
+    var res = document.getElementById('res');
+
+    /*for (var i=0; i<btnsNum.length; i++) {
+        btnsNum[i].addEventListener('click', function () {
+            if (/\d+/.test(this.innerText)) {
+                var str = String(input1.innerText);
+                if (str == '0') {
+                    input1.innerText = this.innerText;
+                } else {
+                    str = str + this.innerText;
+                    input1.innerText = parseFloat(str);
+                }
+            }
+            if (/[.]/.test(this.innerText)) {
+                if (/[.]/.test(input1.innerText)) {return}
+                else {
+                    var n = input1.innerText + this.innerText;
+                    input1.innerText = n;
+                }
+            }
+        })
+    }*/
+
+   function command(v) {
+        if (v == 'c') {
+            input1.innerText = 0;
+            res.innerText = '';
+        } else if(/\d+/.test(v)) {
+            if (/[+-×÷%]/.test(res.innerText)) {
+                input1.innerText = v
+            } else {
+                var str = String(input1.innerText);
+                str = str + v;
+                input1.innerText = parseFloat(str);
+            }
+        } else if (/[.]/.test(v)) {
+            if (/[.]/.test(input1.innerText)) {}
+            else {
+                var n = input1.innerText + v;
+                input1.innerText = n;
+            }
+        } else {
+            res.innerText = input1.innerText + v;
+            input1.innerText = v;
+        }
+    }
+
+
+    function reindex(str) {
+        if (str.indexOf('×') != -1) {
+            return str.indexOf('×');
+        } else if(str.indexOf('÷') != -1) {
+            return str.indexOf('÷');
+        } else if (str.indexOf('+') != -1) {
+            return str.indexOf('+');
+        } else if (str.indexOf('-') != -1) {
+            return str.indexOf('-');
+        } else if (str.indexOf('%') != -1) {
+            return str.indexOf('%');
+        }
+    }
+
+    function calc() {
+        var str = document.getElementById('res').innerText;
+        var index = reindex(str);
+        var num1 = parseFloat(str.substr(0, index));
+        var num2 = parseFloat(input1.innerText);
+        res.innerText = num1 + str.substr(index, index+1) + num2;
+
+        if (str.indexOf('×')!=-1) {
+            //乘法计算
+            input1.innerText = num1*num2;
+            //alert();
+        }else if(str.indexOf('÷')!=-1){
+            //除法计算
+            input1.innerText=num1/num2;
+        }else if(str.indexOf('+')!=-1){
+            //加法计算
+            input1.innerText=num1+num2;
+        }else if(str.indexOf('-')!=-1){
+            //减法计算
+            input1.innerText=num1-num2;
+        }else if(str.indexOf('%')!=-1){
+            //减法计算
+            input1.innerText=num1%num2;
+        }
+
+    }
+</script>
+</body>
+</html>

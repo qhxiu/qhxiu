@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border:none;
+        }
+        .container {
+            width: 1800px;
+            height: 1800px;
+        }
+        .btn-1,
+        .btn-2,
+        .btn-3{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .btn-1 {
+            background-color: red;
+        }
+        .btn-2 {
+            background-color: #008000;
+        }
+        .btn-3 {
+            background-color: #000;
+        }
+        .nav {
+            width: 360px;
+            margin:0 auto;
+        }
+        li {
+            float: left;
+            list-style-type: none;
+        }
+        a {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: green;
+            border-right: 0.5px solid #fff;
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container" class="container">
+    <div id="btn-container">
+        <div class="btn-1" id="btn1"></div>
+        <div class="btn-2" id="btn2"></div>
+        <div class="btn-3" id="btn3"></div>
+    </div>
+    <ul class="nav">
+        <li><a href="">新闻</a></li>
+        <li><a href="">娱乐</a></li>
+        <li><a href="">体育</a></li>
+        <li><a href="">电影</a></li>
+        <li><a href="">音乐</a></li>
+        <li><a href="">旅游</a></li>
+    </ul>
+</div>
+<script>
+   var btn1 = document.getElementById('btn1'),
+       btn2 = document.getElementById('btn2'),
+       btn3 = document.getElementById('btn3'),
+        container = document.getElementById('container');
+
+   btn1.addEventListener('click', function () {
+       container.style.backgroundColor = '#ffdddd';
+       btn1.style.borderWidth = 5 + 'px';
+       btn1.style.borderStyle = 'solid';
+       btn1.style.borderColor = 'red';
+       btn1.style.width = 10 + 'px';
+       btn1.style.height = 10 + 'px';
+       btn1.style.backgroundColor = '#fff';
+       btn2.className = 'btn-2';
+       btn3.className = 'btn-3';
+   });
+   btn2.addEventListener('click', function () {
+       container.style.backgroundColor = '#a3c5a8';
+       btn2.style.borderWidth = 5 + 'px';
+       btn2.style.borderStyle = 'solid';
+       btn2.style.borderColor = '#008000';
+       btn2.style.width = 10 + 'px';
+       btn2.style.height = 10 + 'px';
+       btn2.style.backgroundColor = '#fff';
+   });
+   btn3.addEventListener('click', function () {
+       container.style.backgroundColor = '#ccc';
+       btn3.style.borderWidth = 5 + 'px';
+       btn3.style.borderStyle = 'solid';
+       btn3.style.borderColor = '#000';
+       btn3.style.width = 10 + 'px';
+       btn3.style.height = 10 + 'px';
+       btn3.style.backgroundColor = '#fff';
+   })
+</script>
+</body>
+</html>

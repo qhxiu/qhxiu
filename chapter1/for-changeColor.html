@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btn-container {
+            width: 150px;
+            margin:0 auto;
+            margin-bottom: 10px;
+        }
+        #btn {
+            width: 150px;
+        }
+        .box-container {
+            width: 340px;
+            margin:0 auto;
+        }
+        .box {
+            display: inline-block;
+            background-color: #000;
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="btn-container">
+<button id="btn">点击将DIV变成红色</button>
+</div>
+<div id="box-container" class="box-container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+
+<script>
+    var boxContainer = document.getElementById("box-container"),
+        len = boxContainer.children.length,
+        box = boxContainer.getElementsByTagName('div'),
+        btn = document.getElementById('btn');
+
+    btn.addEventListener('click', function () {
+        for (var i=0; i<len; i++) {
+            box[i].style.backgroundColor = 'red';
+        }
+    })
+
+</script>
+</body>
+</html>

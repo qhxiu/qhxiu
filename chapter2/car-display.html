@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 200px;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+        .car {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            background-color: #dddddd;
+            text-align: center;
+            line-height: 30px;
+        }
+        .car img {
+            display: none;
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top:-5px;
+            bottom: -5px;
+            left: -5px;
+            right: -5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="car" class="car">
+        <p>BMW</p>
+        <p>宝马汽车</p>
+        <img id="img" src="选区_001.png">
+    </div>
+</div>
+
+<script>
+    var car = document.getElementById('car');
+    var img = document.getElementById('img');
+
+    car.addEventListener('mouseover', function () {
+        img.style.display = 'block'
+    })
+    car.addEventListener('mouseout', function () {
+        img.style.display = 'none'
+    })
+</script>
+</body>
+</html>

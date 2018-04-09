@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 400px;
+            margin: 0 auto;
+        }
+        .box {
+            width: 400px;
+            height: 200px;
+            margin: 0 auto;
+            background-color: rgb(254, 244, 235);
+            border: 1px solid orangered;
+        }
+        .btns {
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+        .btns button {
+            margin-right: 5px;
+            background-color: orangered;
+            color: #fff;
+            padding: 3px;
+            border: 0;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="box" class="box">
+        <div class="btns">
+            <button onclick="getStyle()">Get Style</button>
+            <button onclick="setStyle()">Set Style</button>
+            <button onclick="default_style()">Default Style</button>
+        </div>
+    </div>
+    <div class="box"></div>
+</div>
+
+<script>
+    var box = document.getElementById('box');
+    function getStyle() {
+        var background_color = window.getComputedStyle(box, null).getPropertyValue("background-color");
+        var width = window.getComputedStyle(box, null).getPropertyValue("width");
+        var height =  window.getComputedStyle(box, null).getPropertyValue("height");
+        alert("width: "+width + '\n' +  "height: "+height + '\n' + "background-color: "+background_color)
+    }
+    function setStyle() {
+        box.style.width = 330 + 'px';
+        box.style.height = 100 + 'px';
+        box.style.backgroundColor = 'rgb(239, 248, 255)';
+        box.style.borderColor = 'blue';
+        for (var i=0; i<3; i++) {
+            document.getElementsByTagName('button')[i].style.backgroundColor = 'blue'
+        }
+    }
+    function default_style() {
+        box.style.width = 400 + 'px';
+        box.style.height = 200 + 'px';
+        box.style.backgroundColor = 'rgb(254, 244, 235)';
+        box.style.borderColor = 'orangered';
+        for (var i=0; i<3; i++) {
+            document.getElementsByTagName('button')[i].style.backgroundColor = 'orangered'
+        }
+    }
+</script>
+</body>
+</html>

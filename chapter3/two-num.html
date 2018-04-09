@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 200px;
+            margin:0 auto;
+            font-size: 5px;
+        }
+        #input {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="input" type="text" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'') "  />
+        <input type="button" onclick="num()" value="是否为两位数">
+    </div>
+
+<script>
+    function num() {
+        var input = document.getElementById('input');
+        var len = String(input.value).length;
+
+        alert(len+'位数')
+    }
+</script>
+</body>
+</html>

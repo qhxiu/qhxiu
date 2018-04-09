@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #target {
+            width: 100px;
+            height: 100px;
+            background-color: #00FFFF;
+            margin:20px auto;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            display: inline;
+            margin-right: 5px;
+         }
+    </style>
+</head>
+<body>
+<div id="btn-container" class="btn-container">
+    <button class="btn" id="height">变高</button>
+    <button class="btn" id="width">变宽</button>
+    <button class="btn" id="change-color">变色</button>
+    <button class="btn" id="hide">隐藏</button>
+    <button class="btn" id="reload">重置</button>
+</div>
+<div id="target"></div>
+
+<script>
+    var target = document.getElementById('target');
+    var height = document.getElementById('height');
+    var width  = document.getElementById('width');
+    var changeColor = document.getElementById('change-color');
+    var hide = document.getElementById('hide');
+    var reload = document.getElementById('reload');
+    
+    height.addEventListener('click', function () {
+        target.style.height = 200 + 'px';
+    });
+    width.addEventListener('click', function () {
+        target.style.width = 200 + 'px';
+    });
+    changeColor.addEventListener('click', function () {
+        target.style.backgroundColor = 'yellow';
+    });
+    hide.addEventListener('click', function () {
+        target.style.display = 'none';
+    });
+
+    reload.addEventListener('click', function () {
+        console.log('click');
+        target.style.height = 100 + 'px';
+        target.style.width = 100 + 'px';
+        target.style.backgroundColor = '#00ffff';
+        target.style.display = 'block';
+    });
+</script>
+</body>
+</html>

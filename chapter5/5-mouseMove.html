@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 820px;
+            margin: 0 auto;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            display: inline-block;
+            width: 170px;
+            height: 170px;
+            margin-right: 20px;
+        }
+        li.active {
+            border: 1px solid #a10000;
+        }
+        li img {
+            width: 170px;
+            height: 170px;
+        }
+        #big {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+        }
+        #big img {
+            width: 400px;
+            height: 400px;
+        }
+        #big div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            opacity: 0.5;
+            background: #fff url("images/File_Loading_icon.gif") 50% 50% no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li><img src="images/1.jpg"></li>
+        <li><img src="images/2.jpg"></li>
+        <li><img src="images/3.jpg"></li>
+        <li><img src="images/4.jpg"></li>
+    </ul>
+</div>
+<div id="big">
+    <div></div>
+</div>
+
+<script>
+    window.onload = function () {
+        var Li = document.getElementsByTagName('li');
+        var big = document.getElementById('big');
+        var Loading = big.getElementsByTagName('div')[0];
+
+        for (var i=0; i<Li.length; i++) {
+            Li[i].index = i;
+            Li[i].onmouseover = function () {
+                var Img = document.createElement('img');
+                var img = new Image();
+                img.src = Img.src = Li[this.index].getElementsByTagName('img')[0].src;
+                big.appendChild(Img);
+                this.className = 'active';
+                big.style.display = Loading.style.display = 'block';
+                Img.complete ? Loading.style.display = 'none' : (Img.onload = function () {
+                    Loading.style.display = 'none';
+                })
+            };
+            Li[i].onmousemove = function (event) {
+                var event = event || window.event;
+                var Width = document.documentElement.offsetWidth - event.clientX;
+                big.style.top = event.clientY + 20 + 'px';
+                big.style.left = (Width < big.offsetWidth + 10 ? event.clientX - big.offsetWidth : event.clientX + 10) + 'px';
+            };
+            Li[i].onmouseout = function () {
+                big.style.display = 'none';
+                this.className = '';
+
+                big.removeChild(big.lastChild);
+            }
+        }
+    }
+</script>
+</body>
+</html>
