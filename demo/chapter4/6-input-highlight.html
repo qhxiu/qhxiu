@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 400px;
+            margin:0 auto;
+            background-color: rgb(254, 244, 235);
+            border: 1px solid orangered;
+        }
+        h2 {
+            margin: 0;
+            color: orangered;
+            background-color: rgb(255, 235, 215);
+            padding: 5px 10px;
+            border-bottom: 1px solid orangered;
+        }
+        p {
+            float: left;
+            clear: both;
+            width: 100%;
+            height: 31px;
+            line-height: 31px;
+        }
+        form label, form input {
+            float: left;
+        }
+        .login {
+            width: 87px;
+            background-color: orangered;
+            padding: 5px 30px;
+            border-radius: 3px;
+            border: none;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+            margin-left: 132px;
+        }
+        .f-text {
+            background-color: rgb(255,231,231);
+        }
+    </style>
+</head>
+<body>
+<form class="container">
+    <h2>用户登录</h2>
+    <p><label>用户名：</label><input class="f-text" type="text"></p>
+    <p><label>密码：</label><input class="f-text" type="text"></p>
+    <p><label></label><input class="f-text" type="password" value="登录"></p>
+</form>
+
+<script>
+    window.onload = function () {
+        var aInput = document.getElementsByTagName('input');
+        for (var i=0; i<aInput.length; i++) {
+            aInput[i].onfocus = function () {
+                this.className = 'f-text';
+            }
+            aInput[i].onblur = function () {
+                this.className = 'f-origin';
+            }
+        }
+    }
+</script>
+</body>
+</html>

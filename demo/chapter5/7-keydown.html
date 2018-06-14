@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            overflow: hidden;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            top:50px;
+            left:300px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+
+<script>
+    window.onload = function () {
+        var box = document.getElementById('box');
+        var bLeft = bTop = bRight = bBottom = bCtrlKey = false;
+
+        setInterval(function () {
+            if (bLeft) {
+                box.style.left = box.offsetLeft - 10 + 'px';
+            } else if (bRight) {
+                box.style.left = box.offsetLeft + 10 + 'px';
+            }
+            if (bTop) {
+                box.style.top = box.offsetTop - 10 + 'px';
+            } else if (bBottom) {
+                box.style.top = box.offsetTop + 10 + 'px';
+            }
+            limit();
+        }, 30);
+
+        document.onkeydown = function (event) {
+            var event = event || window.event;
+            var ctrlKey = event.ctrlKey;
+            switch (event.keyCode) {
+                case 37:
+                    bLeft = true;
+                    break;
+                case 38:
+                    if (ctrlKey) {
+                        var oldWidth = box.offsetWidth;
+                        var oldHeight = box.offsetHeight;
+                        box.style.width = box.offsetWidth * 1.5 + 'px';
+                        box.style.height = box.offsetHeight * 1.5 + 'px';
+                        box.style.left = box.offsetLeft - (box.offsetWidth - oldWidth) / 2 + 'px';
+                        box.style.top = box.offsetTop - (box.offsetHeight - oldHeight) / 2 + 'px';
+                        console.log(box.style.left, box.style.top);
+                        break;
+                    }
+                    bTop = true;
+                    break;
+                case 39:
+                    bRight = true;
+                    break;
+                case 40:
+                    if (ctrlKey) {
+                        var oldWidth = box.offsetWidth;
+                        var oldHeight = box.offsetHeight;
+                        box.style.width = oldWidth * 0.75 + 'px';
+                        box.style.height = oldHeight * 0.75 + 'px';
+                        box.style.left = box.offsetLeft - (box.offsetWidth - oldWidth) / 2 + 'px';
+                        box.style.top = box.offsetTop - (box.offsetHeight - oldHeight) / 2 + 'px';
+                        break;
+                    }
+                    bBottom = true;
+                    break;
+                case 49:
+                    ctrlKey && (box.style.backgroundColor = 'green');
+                    break;
+                case 50:
+                    ctrlKey && (box.style.backgroundColor = 'yellow');
+                    break;
+                case 51:
+                    ctrlKey && (box.style.backgroundColor = 'blue');
+                    break;
+            }
+            return false;
+        }
+        document.onkeyup = function (event) {
+            var event = event || window.event;
+            switch (event.keyCode) {
+                case 37:
+                    bLeft = false;
+                    break;
+                case 38:
+                    bTop = false;
+                    break;
+                case 39:
+                    bRight = false;
+                    break;
+                case 40:
+                    bBottom = false;
+                    break;
+            }
+        };
+
+        function limit() {
+            var doc = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+            box.offsetLeft <= 0 && (box.style.left = 0);
+            box.offsetTop <= 0 && (box.style.top = 0);
+            doc[0] - box.offsetLeft - box.offsetWidth <= 0 && (box.style.left = doc[0] - box.offsetWidth + 'px');
+            doc[1] - box.offsetTop - box.offsetHeight <= 0 && (box.style.top = doc[1] - box.offsetHeight + 'px');
+        }
+    }
+</script>
+</body>
+</html>

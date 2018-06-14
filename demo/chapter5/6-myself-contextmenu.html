@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #menu {
+            position: absolute;
+            list-style-type: none;
+            border: 1px solid #000;
+            width: 64px;
+            display: none;
+        }
+        li {
+            padding: 0 20px;
+            padding-bottom: 5px;
+        }
+        li:hover {
+            background-color: #aaaaaa;
+            color: #fff;
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<center>自定义右键菜单,请在页面点击右键查看效果</center>
+<ul id="menu">
+    <li><a href="javascript:;">剪切</a></li>
+    <li><a href="javascript:;">复制</a></li>
+    <li><a href="javascript:;">粘贴</a></li>
+</ul>
+
+<script>
+    window.onload = function () {
+        var menu = document.getElementById('menu');
+        var Li = document.getElementsByTagName('li');
+        for (var i=0; i<Li.length; i++) {
+            Li[i].onmouseover = function () {
+                
+            }
+        }
+        document.oncontextmenu = function (event) {
+            var event = event || window.event;
+            menu.style.display = 'block';
+            menu.style.left = event.clientX + 'px';
+            menu.style.top = event.clientY + 'px';
+            return false;
+        }
+        document.onclick = function () {
+            menu.style.display = 'none';
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 860px;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        ul {
+            margin: 10px 0 10px 10px;
+        }
+        li {
+            display: inline-block;
+            margin-right: 10px;
+            width: 140px;
+            height: 105px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        li img {
+            width: 140px;
+            height: 105px;
+        }
+        .hig {
+            border: 1px dashed red;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <a href="javascript:;">随机排序</a>
+    <ul></ul>
+</div>
+
+<script>
+    var $ = function (id) {
+        return typeof id === 'string' ? document.getElementById(id) : id;
+    };
+    var $$ = function (tagName, parent) {
+        return (parent || document).getElementsByTagName(tagName);
+    };
+    var $$$ = function (sClass, parent) {
+        var Class = [], i = 0;
+        reClass = new RegExp("(\\s|^)" + sClass + "($|\\s)");
+        aElement = $$('*', parent);
+        for (i=0; i<aElement.length; i++) {
+            reClass.test(aElement[i].className) && (Class.push(aElement[i]));
+        }
+        return Class;
+    };
+    function getPos(obj) {
+        var top = obj.offsetTop;
+        var left = obj.offsetLeft;
+        obj = obj.offsetParent;
+        while (obj.offsetParent) {
+            top += obj.offsetParent.offsetTop;
+            left += obj.offsetParent.offsetLeft;
+            obj = obj.offsetParent;
+        }
+        return {top: top, left: left};
+    }
+    var photoWall = function () {
+        this.initialize.apply(this, arguments);
+    };
+    photoWall.prototype = {
+        initialize: function (obj, data) {
+            var that = this;
+            this.parent = $(obj);
+            this.ul = $$('ul', this.parent)[0];
+            this.btn = $$('a', this.parent)[0];
+            this.zIndex = 1;
+            this.data = data;
+            this.dom = document.documentElement || document.body;
+            this.pos = [];
+            this.create();
+            this.btn.onclick = function () {
+                //console.log('click')
+                that.randomOrder()
+            }
+        },
+        create: function () {
+            var fragment = document.createDocumentFragment();
+            var i = 0;
+            for (i=0; i<this.data.length; i++) {
+                var li = document.createElement('li');
+                var img = document.createElement('img');
+                img.src = this.data[i];
+                li.appendChild(img);
+                fragment.appendChild(li);
+            }
+            this.ul.appendChild(fragment);
+            this.aLi = $$('li', this.parent);
+            this.changeLayout();
+        },
+        changeLayout: function () {
+            var i = 0;
+            this.parent.style.height = this.parent.offsetHeight - 2 + 'px';
+            this.pos.length = 0;
+            for (i=0; i<this.aLi.length; i++) {
+                this.aLi[i].style.cssText = '';
+            }
+            for (i=0; i<this.aLi.length; i++) {
+                this.aLi[i].index = i;
+                console.log(this.aLi[i].offsetTop);
+                this.aLi[i].style.top = getPos(this.aLi[i]).top + 'px';
+                this.aLi[i].style.left = getPos(this.aLi[i]).left + 'px';
+                this.pos.push({left: getPos(this.aLi[i]).left, top: getPos(this.aLi[i]).top});
+            }
+            console.log(this.pos);
+            for (i=0; i<this.aLi.length; i++) {
+                this.aLi[i].style.position = 'absolute';
+                this.aLi[i].style.margin = "0";
+                this.drag(this.aLi[i]);
+            }
+        },
+        drag: function (obj, handle) {
+            var oThis = this;
+            var handle = handle || obj;
+            handle.style.cursor = "move";
+            handle.onmousedown = function (event) {
+                var event = event || window.event;
+                var disX = event.clientX - this.offsetLeft;
+                var disY = event.clientY - this.offsetTop;
+                var oNear = null;
+                handle.style.zIndex = oThis.zIndex++;
+
+                document.onmousemove = function (event) {
+                    var event = event || window.event;
+                    var iL = event.clientX - disX;
+                    var iT = event.clientY - disY;
+                    var maxL = Math.max(oThis.dom.clientWidth, oThis.dom.scrollWidth) - handle.offsetWidth;
+                    var maxT = Math.max(oThis.dom.clientHeight, oThis.dom.scrollHeight) - handle.offsetHeight;
+
+                    iL < 0 && (iL = 0);
+                    iT < 0 && (iT = 0);
+                    iL > maxL && (iL = maxL);
+                    iT > maxT && (iT = maxT);
+                    
+                    handle.style.left = iL + 'px';
+                    handle.style.top = iT + 'px';
+
+                    // oNear就是与obj距离最短且相交的照片
+                    oNear = oThis.findNearest(obj);
+                    for (var i=0; i<oThis.aLi.length; i++) oThis.aLi[i].className = "";
+                    oNear && (oNear.className = "hig");
+                    return false
+                }
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    if (oNear) {
+                        handle.index = [handle.index, oNear.index];
+                        oNear.index = handle.index[0];
+                        handle.index = handle.index[1];
+                        oNear.style.zIndex = oThis.zIndex++;
+                        oThis.doMove(handle, oThis.pos[handle.index]);
+                        oThis.doMove(oNear, oThis.pos[oNear.index]);
+                        oNear.className = "";
+                    }
+                    else {
+                        oThis.doMove(handle, oThis.pos[handle.index]);
+                    }
+                    handle.releaseCapture && handle.releaseCapture()
+                };
+                this.setCapture && this.setCapture();
+                return false;
+            }
+        },
+        findNearest: function (obj) {
+            var distance = [];
+            var i = 0;
+            for (i=0; i<this.aLi.length; i++) {
+                distance[i] = this.aLi[i] == obj ? Number.MAX_VALUE : this.getDistance(obj, this.aLi[i])
+            }
+            var minNum = Number.MAX_VALUE;
+            var minIndex = -1;
+            // 循环distance, 其中任何一个元素都小于Number.MAX_VALUE, 每次对比之后小于的元素就会重新复制到minNum, 直到对比完整个数组
+            for (i=0; i<distance.length; i++) {
+                distance[i] < minNum && (minNum = distance[i], minIndex = i);
+            }
+            // 如果obj与this.aLi[minIndex]有交集，返回this.aLi[minIndex]
+            return this.isButt(obj, this.aLi[minIndex]) ? this.aLi[minIndex] : null;
+        },
+        getDistance: function (obj1, obj2) {
+            var a = (obj1.offsetLeft + obj1.offsetWidth / 2) - (obj2.offsetLeft + obj2.offsetWidth / 2);
+            var b = (obj1.offsetTop + obj1.offsetTop / 2) - (obj2.offsetTop + obj2.offsetTop / 2);
+            // 中心点的距离
+            return Math.sqrt(a*a + b*b);
+        },
+        isButt: function (obj1, obj2) {
+            var l1 = obj1.offsetLeft;
+            var t1 = obj1.offsetTop;
+            var r1 = l1 + obj1.offsetWidth;
+            var b1 = t1 + obj1.offsetHeight;
+
+            var l2 = obj2.offsetLeft;
+            var t2 = obj2.offsetTop;
+            var r2 = l2 + obj2.offsetWidth;
+            var b2 = t2 + obj2.offsetHeight;
+
+            // r1<l2 obj1向右侧移动，与右边照片相交
+            // r2<l1 obj1向左侧移动
+            // b1<t2 obj1向下移动
+            // b2<t1 obj1向上移动
+            return !(r1 < l2 || b1 < t2 || r2 < l1 || b2 < t1);
+        },
+        randomOrder: function () {
+            this.pos.sort(function () {
+                return Math.random() > 0.5 ? 1 : -1
+            });
+            for (var i = 0; i < this.aLi.length; i++) {
+                this.aLi[i].index = i;
+                this.doMove(this.aLi[i], this.pos[i])
+            }
+        },
+        doMove: function (obj, iTarget, callback) {
+            var that = this;
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var iCurL = getPos(obj).left;
+                var iCurT = getPos(obj).top;
+                var iSpeedL = (iTarget.left - iCurL) / 5;
+                var iSpeedT = (iTarget.top - iCurT) / 5;
+                iSpeedL = iSpeedL > 0 ? Math.ceil(iSpeedL) : Math.floor(iSpeedL);
+                iSpeedT = iSpeedT > 0 ? Math.ceil(iSpeedT) : Math.floor(iSpeedT);
+
+                if (iCurL == iTarget.left && iCurT == iTarget.top)
+                {
+                    clearInterval(obj.timer);
+                    callback && callback()
+                }
+                else
+                {
+                    obj.style.left = iCurL + iSpeedL + "px";
+                    obj.style.top = iCurT + iSpeedT + "px"
+                }
+            }, 30)
+        }
+    };
+    window.onload = function () {
+        var box = $$$('box');
+        var data = [];
+        var examples = [];
+        var i = 0;
+        for (i=0;i<15; i++) data[data.length] = 'images/' + i + '.jpg';
+        for (i=0; i<box.length; i++) {
+            var example = new photoWall(box[i], data);
+            examples.push(example);
+        }
+//        this.onresize = function () {
+//            for (var p in examples) {
+//                examples[p].changeLayout()
+//            }
+//        };
+        //this.onresize()
+    }
+</script>
+</body>
+</html>

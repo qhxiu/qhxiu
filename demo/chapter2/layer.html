@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *:not(button) {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .toast {
+            position: fixed;
+            top:50%;
+            left: 50%;
+            width: 300px;
+            height: 150px;
+            margin-left: -150px;
+            margin-top: -75px;
+            border: 3px solid orange;
+            background-color: #fff;
+            display: none;
+        }
+        .inner {
+            padding-bottom: 30px;
+            background-color: #f5bd58;
+            border-bottom: 3px solid orange;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 1px solid orange;
+            left: 270px;
+            top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="btn">弹出层</button>
+        <div id="toast" class="toast">
+            <div class="inner">
+                <div id="close" class="close"></div>
+            </div>
+        </div>
+    </div>
+<script>
+    var btn = document.getElementById('btn');
+    var toast = document.getElementById('toast');
+    var close = document.getElementById('close');
+
+    btn.addEventListener('click', function () {
+        document.body.style.backgroundColor = '#ccc';
+        toast.style.display = 'block';
+    });
+    close.addEventListener('click', function () {
+       toast.style.display = 'none';
+        document.body.style.backgroundColor = '#fff';
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #000;
+        }
+        .container {
+            width: 220px;
+            margin:0 auto;
+            background-color: #fff;
+            border-radius: 3px;
+            border: 10px solid #fff;
+            border-right: 5px solid #fff;
+        }
+        .display-img {
+            display: inline-block;
+            width: 160px;
+            height: 160px;
+        }
+        .display-img img {
+            display: inline;
+            width: 160px;
+            height: 160px;
+        }
+        .img-container img {
+            float: right;
+            width: 50px;
+            height: 50px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .img-container img:first-child {
+            margin-top: -165px;
+        }
+        .img-container img:nth-of-type(2) {
+            margin-top: -110px;
+        }
+        .img-container img:nth-of-type(3) {
+            margin-top: -55px;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="display-img">
+            <img id="display" src="images/1.jpg">
+        </div>
+        <div id="img-container" class="img-container">
+            <img src="images/1.jpg">
+            <img src="images/2.jpg">
+            <img src="images/3.jpg">
+            <img src="images/4.jpg">
+            <img src="images/5.jpg">
+            <img src="images/6.jpg">
+            <img src="images/7.jpg">
+            <img src="images/8.jpg">
+            <img src="images/9.jpg">
+            <img src="images/10.jpg">
+            <img src="images/11.jpg">
+        </div>
+        <div class="clear"></div>
+    </div>
+
+<script>
+    var imgs = document.getElementById('img-container').getElementsByTagName('img');
+    var display = document.getElementById('display');
+
+    for (var i=0; i<imgs.length; i++) {
+        imgs[i].addEventListener('mouseover', function () {
+            display.src = this.src;
+        })
+    }
+</script>
+</body>
+</html>

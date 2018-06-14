@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake</title>
+    <style>
+        #box {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin:10px auto;
+            border: 1px solid #000;
+        }
+        #sub-box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: #92a5bb;
+            top: 100px;
+            left: 100px;
+            border: 1px solid #000;
+        }
+        #min-box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="sub-box">
+        <div id="min-box"></div>
+    </div>
+</div>
+
+<script>
+    var getPos = function (obj) {
+        var top = obj.offsetTop;
+        var left = obj.offsetLeft;
+        while (obj.offsetParent) {
+            top += obj.offsetParent.offsetTop;
+            left += obj.offsetParent.offsetLeft;
+            console.log(obj.offsetParent)
+            obj = obj.offsetParent;
+        }
+        console.log(top, left);
+        return {top: top, left: left};
+    };
+
+    function Aaa(i, callback) {
+        this.initialize.apply(this, arguments)}
+        
+    Aaa.prototype = {
+        initialize: function (i, callback) {
+            this.i = i;
+            var that = this;
+            this.callback = callback;
+            this.flag = true;
+            clearInterval(this.timer);
+            this.timer = setInterval(function () {
+                that.doMove()
+            }, 1000);
+            //
+        },
+        doMove: function () {
+            var that = this;
+            var flag = true;
+            console.log(this.i);
+            this.i > 0 || (flag = false);
+            flag && (clearInterval(this.timer) ,this.callback && this.callback(this));
+        }
+    }
+
+    window.onload = function () {
+        var minBox = document.getElementById('min-box');
+        //getPos(subBox);
+        console.log(getPos(minBox));
+        //console.log(subBox.offsetTop)
+        var i = 0;
+        var bOrder = true;
+        function begin () {
+            bOrder ? i++ : i--;
+            //console.log(i);
+            var obj = new Aaa(i, begin);
+            if (i == 5 || i<0) {
+                clearInterval(obj.timer);
+                bOrder = !bOrder;
+                return
+            }
+
+        }
+        //begin();
+    }
+</script>
+</body>
+</html>

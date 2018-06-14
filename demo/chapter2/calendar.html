@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 260px;
+            margin:0 auto;
+            background-color: #ccc;
+        }
+        .box {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            color: #fff;
+            background-color: #000;
+            margin:10px 0 10px 10px;
+        }
+        .box span {
+            display: block;
+            margin-top: 5px;
+            margin-left: 15px;
+        }
+        .box span:first-child {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: -3px;
+        }
+        .footer {
+            display: inline-block;
+            background-color: #eeeeee;
+            width: 92%;
+            margin: 0 10px 10px 10px;
+            border: 1px solid #fff;
+            border-radius: 3px;
+        }
+        .footer p {
+            line-height: 13px;
+            margin-left: 5px;
+        }
+        .month {
+            display: none;
+        }
+        .month:first-child {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="boxs" class="box-container">
+        <div class="box">
+            <span>1</span><span>JAN</span>
+        </div>
+        <div class="box">
+            <span>2</span><span>FER</span>
+        </div>
+        <div class="box">
+            <span>3</span><span>MAR</span>
+        </div>
+        <div class="box">
+            <span>4</span><span>APR</span>
+        </div>
+        <div class="box">
+            <span>5</span><span>MAY</span>
+        </div>
+        <div class="box">
+            <span>6</span><span>JUN</span>
+        </div>
+        <div class="box">
+            <span>7</span><span>JUL</span>
+        </div>
+        <div class="box">
+            <span>8</span><span>AUG</span>
+        </div>
+        <div class="box">
+            <span>9</span><span>SEP</span>
+        </div>
+        <div class="box">
+            <span>10</span><span>OCT</span>
+        </div>
+        <div class="box">
+            <span>11</span><span>NOV</span>
+        </div>
+        <div class="box">
+            <span>12</span><span>DEC</span>
+        </div>
+    </div>
+    <div id="month" class="footer">
+        <div class="month">
+            <p><strong>1月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>2月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>3月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>4月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>5月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>6月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>7月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>8月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>9月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>10月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>11月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+        <div class="month">
+            <p><strong>12月节日</strong></p>
+            <p>元旦:1月1日至3日放假三天</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    var box = document.getElementById('boxs').getElementsByTagName('div');
+    var month = document.getElementById('month').getElementsByTagName('div');
+
+    for (var i=0; i<box.length; i++) {
+        box[i].index = i;
+
+        box[i].addEventListener('mouseover', function () {
+            this.style.backgroundColor = '#fff';
+            this.style.color = 'pink';
+//            this.style.borderColor = '#000';
+//            this.style.borderStyle = 'solid';
+//            this.style.borderWidth = 1 + 'px';
+            console.log(this.index)
+
+            for (var j=0; j<month.length; j++) {
+                month[j].style.display = 'none';
+            }
+            month[this.index].style.display = 'block';
+        })
+
+        box[i].addEventListener('mouseout', function () {
+            this.style.backgroundColor = '#000';
+            this.style.color = '#fff';
+            this.style.border = 'none';
+        })
+    }
+</script>
+</body>
+</html>

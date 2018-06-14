@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #052d01;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            position: relative;
+            width: 210px;
+            height: 700px;
+            margin: 20px;
+            border: 1px solid #5e8743;
+        }
+        #box .up {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            left: 50%;
+            top: 10px;
+            overflow: hidden;
+            margin-left: -24px;
+            background: url("images/index.jpeg") no-repeat;
+            z-index: 10;
+            text-indent: -9999px;
+            cursor: pointer;
+        }
+        #box .down {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            left: 50%;
+            margin-left: -24px;
+            bottom: 10px;
+            background: url("images/index.jpeg") no-repeat;
+            background-position: 0 -48px;
+            z-index: 10;
+            text-indent: -9999px;
+            cursor: pointer;
+        }
+        #box div {
+            position: absolute;
+            width: 160px;
+            height: 570px;
+            left: 50%;
+            margin-left: -80px;
+            top:50%;
+            margin-top: -285px;
+            overflow: hidden;
+        }
+        #box ul {
+            position: absolute;
+            width: 160px;
+        }
+        #box li {
+            width: 160px;
+            height: 190px;
+            list-style: none;
+            text-align: center;
+        }
+        #box img {
+            width: 156px;
+            height: 156px;
+            display: block;
+            margin-bottom: 5px;
+            border: 2px solid #fff;
+        }
+        #box a {
+            color: #fff;
+            /*font-weight: 700;*/
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span class="up">up</span>
+        <span class="down">down</span>
+        <div>
+            <ul class="list">
+                <li><a href="javascript:;"><img src="images/1.jpeg">Sullivan Construction Inc.</a></li>
+                <li><img src="images/2.jpeg"></li>
+                <li><img src="images/3.jpeg"></li>
+                <li><img src="images/4.jpeg"></li>
+                <li><img src="images/5.jpeg"></li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+    var $ = function (id) {return typeof id == 'string' ? document.getElementById(id) : id;};
+    var $$ = function (tagName, parent) {return (parent || document).getElementsByTagName(tagName)};
+    var $$$ = function (sClass, parent) {
+        var Class = [], i = 0;
+        reClass = new RegExp("(\\s|^)" + sClass + "($|\\s)");
+        aElement = $$('*', parent);
+        for (i=0; i<aElement.length; i++) {
+            reClass.test(aElement[i].className) && (Class.push(aElement[i]));
+        }
+        return Class;
+    };
+    
+    var Scroll = function () {this.initialize.call(this, arguments)}
+    
+    Scroll.prototype = {
+        initialize: function () {
+            var that = this;
+            this.box = $('box');
+            this.Bup = $$$('up', this.box)[0];
+            this.Bdown = $$$('down', this.box)[0];
+            this.List = $$$('list', this.box)[0];
+            this.Li = $$('li', this.box);
+            this.timer = null;
+            this.iHeight = this.Li[0].offsetHeight;
+            console.log(this.List.offsetLeft)
+
+            this.Bup.onclick = function () {
+                that.up();
+            };
+            this.Bdown.onclick = function () {
+                that.down();
+            };
+        },
+        up: function () {
+            this.List.insertBefore(this.Li[this.Li.length - 1], this.List.firstChild);
+            this.List.style.top = -this.iHeight + 'px';
+            this.doMove(0);
+        },
+        down: function () {
+            var that = this;
+            this.doMove(-this.iHeight, function () {
+                that.List.appendChild(that.Li[0]);
+                that.List.style.top = 0;
+            })
+        },
+        doMove: function (iTarget, callBack) {
+            var that = this;
+            clearInterval(this.timer);
+            this.timer = setInterval(function () {
+                var iSpeed = (iTarget - that.List.offsetTop) / 5;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                that.List.offsetTop == iTarget ? (clearInterval(that.timer), callBack && callBack(that)) : that.List.style.top = iSpeed + that.List.offsetTop + 'px';
+            }, 30)
+        }
+    };
+    window.onload = function () {
+        new Scroll();
+    }
+</script>
+</body>
+</html>

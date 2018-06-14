@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #2a6496;
+            font:12px/1.5 \5fae\8f6f\96c5\9ed1;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style-type: none;
+        }
+        #search, #search .box. #search form {
+            height: 34px;
+        }
+        .container {
+            position: relative;
+            width: 300px;
+            margin:10px auto;
+            background-color: #dddddd;
+            border-radius: 2px;
+        }
+        form {
+            margin: 0 20px 0 7px;
+        }
+        img {
+            margin-left: 5px;
+        }
+        span {
+            display: inline-block;
+            background-color: #2a2a2a;
+            color: #fff;
+            width: 150px;
+            margin: 3px;
+            padding: 0;
+            padding-left: 5px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        input {
+            padding: 0 20px;
+            border: 1px dotted #2a6496;
+            margin-top: 2px;margin-left: 5px;
+            letter-spacing: 2px;
+        }
+        input:hover {
+            color: orange;
+        }
+        .sub {
+            position: absolute;
+            top: 26px;
+            left: 40px;
+            color: #fff;
+            width: 152px;
+            background-color: #2b2b2b;
+            border: 1px solid #fff;
+            display: none;
+        }
+        .sub li {
+            height: 25px;
+            line-height: 24px;
+            cursor: pointer;
+            padding-left: 10px;
+            margin-bottom: -1px;
+            border-bottom: 1px dotted #fff;
+        }
+        .sub li:hover {
+            background: #8b8b8b;
+        }
+    </style>
+</head>
+<body>
+    <div id="search" class="container">
+        <div class="box">
+            <form>
+                <img src="images/search.png" width="15" height="15">
+                <span>请选择游戏名称</span>
+                <input type="button" value="搜索">
+            </form>
+        </div>
+        <ul class="sub">
+            <li>地下城</li>
+            <li>魔兽</li>
+            <li>英雄联盟</li>
+        </ul>
+    </div>
+
+<script>
+    window.onload = function () {
+        var select = document.getElementsByTagName('span')[0];
+        var sub = document.getElementsByClassName('sub')[0];
+        var Li = document.getElementsByTagName('li');
+
+        select.onclick = function (event) {
+            var style = sub.style;
+            style.display = style.display == 'block' ? 'none' : 'block';
+            (event || window.event).cancelBubble = true;
+        }
+        for (var i=0; i<Li.length; i++) {
+            Li[i].onmouseover = function () {
+                this.className = 'hover';
+            };
+            Li[i].onclick = function () {
+                select.innerText = this.innerText;
+                sub.style.display = 'none';
+            }
+        }
+        document.onclick = function () {
+            sub.style.display = 'none';
+        }
+    }
+    
+</script>
+</body>
+</html>

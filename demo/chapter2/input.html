@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 100px;
+            margin:0 auto;
+        }
+        ul {
+            width: 30px;
+            /*margin-left: -25%;*/
+            border: 1px solid blue;
+            display: none;
+            cursor: pointer;
+        }
+        ul > li {
+            list-style-type: none;
+            letter-spacing: 3px;
+            /*margin-bottom: 5px;*/
+            margin-left: -40px;
+            padding-left: 20px;
+            padding-bottom: 5px;
+            color: blue;
+            text-align: center;
+
+        }
+        a {
+            display: inline-block;
+            margin-left: -20px;
+            margin-bottom: -5px;
+            padding: 5px 20px;
+        }
+        li:last-child {
+            border-top: 1px solid blue;
+        }
+        a:hover {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <button id="btn">输入法</button>
+    <ul id="table">
+        <li><a>手写</a></li>
+        <li><a>拼音</a></li>
+        <li onclick="document.getElementById('table').style.display = 'none'"><a>关闭</a></li>
+    </ul>
+</div>
+
+<script>
+    var btn = document.getElementById('btn');
+    var ul = document.getElementById('table');
+    var close = document.getElementById('close');
+
+    btn.addEventListener('click', function () {
+        var style = window.getComputedStyle(ul, null);
+        if (style.display === 'none') {
+            ul.style.display = 'block';
+        } else if (style.display === 'block') {
+            ul.style.display = 'none';
+        }
+    })
+
+</script>
+</body>
+</html>

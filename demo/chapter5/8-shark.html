@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 300px;
+            left: 300px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+
+<script>
+    window.onload = function () {
+        var box = document.getElementById('box');
+        var timer;
+
+        box.onclick = function () {
+            var i=0;
+            clearInterval(timer);
+            timer = setInterval(function () {
+                box.style.display = i++ % 2 ? 'none' : 'block';
+                i > 6 && (clearInterval(timer));
+            }, 80)
+        }
+    }
+</script>
+</html>

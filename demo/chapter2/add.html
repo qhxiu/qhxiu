@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 400px;
+            margin:0 auto;
+        }
+        .container input {
+            margin: 5px 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="container">
+<input id="input" type="text" >输入数字求和,数字之间用半角","号分隔<br>
+    <button id="btn">求和</button>
+</div>
+
+<script>
+    var input = document.getElementById('input');
+    var btn = document.getElementById('btn');
+    var container = document.getElementById('container');
+
+    btn.addEventListener('click', function () {
+        var val = input.value;
+        var arr = val.split(',');
+        arr = arr.map(function (x) {
+            return Number(x);
+        });
+        var res = arr.reduce(function (p1, p2) {
+            return p1 + p2;
+        });
+        if (document.getElementById('result')) {
+            var result = document.getElementById('result');
+            result.style.fontSize = 20 + 'px';
+            result.style.marginTop = 20 + 'px';
+            result.innerHTML = res;
+        } else {
+            var result = document.createElement('div');
+            result.id = 'result';
+            result.style.color = 'red';
+            result.style.fontSize = 20 + 'px';
+            result.style.marginTop = 20 + 'px';
+            result.innerHTML = res;
+            container.appendChild(result);
+        }
+
+    })
+</script>
+</body>
+</html>

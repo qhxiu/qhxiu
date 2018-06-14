@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            background-color: #eee;
+            color: green;
+            border: 1px dotted #000;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-family: "Courier New";
+            margin: 12px 0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    January(1),February(2),March(3),April(4),May(5),June(6),July(7),Aguest(8),September(9),October(10),November(11),December(12)
+</div>
+<button>删除January(1)</button>
+<button>删除December(12)</button>
+<div>
+    0,1,2,3,4,5,6,7,8,9
+</div>
+<button>复制</button>
+<button>还原</button>
+<div>
+    red,green,blue,white,yellow,black,brown
+</div>
+<button>还原</button>
+<button>删除前三项</button>
+<button>删除第二至三项</button>
+<button>在第二项后插入(orange,purple)</button>
+<button>替换第二项和第三项</button>
+
+<script>
+window.onload = function () {
+    var aPre = document.getElementsByTagName('div');
+    var aButton = document.getElementsByTagName('button');
+    var orText = aPre[2].innerText;
+    var item, arr;
+    
+    aButton[0].onclick = function () {
+        var btnName = this.innerHTML;
+        if (btnName.indexOf('删除') != -1) {
+            var text = aPre[0].innerText.split(',');
+            item = text.shift();
+            aPre[0].innerText = text;
+            this.innerText = '添加January(1)'
+        } else {
+            var text = aPre[0].innerText.split(',');
+            text.unshift(item);
+            aPre[0].innerText = text;
+            this.innerText = '删除January(1)'
+        }
+
+    };
+    aButton[1].onclick = function () {
+        var btnName = this.innerHTML;
+        if (btnName.indexOf('删除') != -1) {
+            var text = aPre[0].innerText.split(',');
+            item = text.pop();
+            aPre[0].innerText = text;
+            this.innerText = '添加December(12)'
+        } else {
+            var text = aPre[0].innerText.split(',');
+            text.push(item);
+            aPre[0].innerText = text;
+            this.innerText = '删除December(12)'
+        }
+
+    };
+    aButton[2].onclick = function () {
+        var text = aPre[1].innerText;
+        aPre[1].innerText = aPre[1].innerText + ',' + text;
+    };
+    aButton[3].onclick = function () {
+        aPre[1].innerText = aPre[1].innerText.slice(0, 19);
+    };
+    aButton[4].onclick = function () {
+        aPre[2].innerText = orText;
+    };
+    aButton[5].onclick = function () {
+      arr = aPre[2].innerText.split(',');
+      arr.splice(0,3);
+      console.log(arr);
+      aPre[2].innerText = arr;
+    };
+    aButton[6].onclick = function () {
+        arr = aPre[2].innerText.split(',');
+        arr.splice(1,2);
+        aPre[2].innerText = arr;
+    };
+    aButton[7].onclick = function () {
+        arr = aPre[2].innerText.split(',');
+        arr.splice(2,0,['orange', 'purple']);
+        aPre[2].innerText = arr;
+    };
+    aButton[8].onclick = function () {
+        arr = aPre[2].innerText.split(',');
+        var ar3 = arr.splice(2,1);
+        var ar2 = arr.splice(1,1);
+        arr.splice(1, 0, ar3);
+        arr.splice(2, 0, ar2);
+        aPre[2].innerText = arr;
+    };
+}
+</script>
+</body>
+</html>

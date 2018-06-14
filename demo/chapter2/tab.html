@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 450px;
+            margin:0 auto;
+        }
+        .nav-tab {
+            height: 33px;
+            background-color: #000;
+        }
+        .nav-tab span {
+            display: inline-block;
+            line-height: 33px;
+            height: 33px;
+            width:80px;
+            text-align: center;
+            color: #fff;
+            margin-right: -3px;
+        }
+        .content-container {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="tabs" class="nav-tab">
+            <span>第一课</span>
+            <span>第二课</span>
+            <span>第三课</span>
+        </div>
+        <div id="content" class="content-container">
+            <ul class="content-tab">
+                <li><p>网页特效原理分析</p></li>
+                <li><p>响应用户操作</p></li>
+                <li><p>提示框效果</p></li>
+                <li><p>事件驱动</p></li>
+                <li><p>元素属性操作</p></li>
+                <li><p>动手编写第一个js特效</p></li>
+                <li><p>引入函数</p></li>
+                <li><p>网页换肤效果</p></li>
+                <li><p>展开/收缩播放列表效果</p></li>
+            </ul>
+            <ul class="content-tab" style="display: none">
+                <li><p>改变网页背景颜色</p></li>
+                <li><p>函数传参</p></li>
+                <li><p>高重用性函数的编写</p></li>
+                <li><p>事件驱动</p></li>
+                <li><p>元素属性操作</p></li>
+                <li><p>动手编写第一个js特效</p></li>
+                <li><p>引入函数</p></li>
+                <li><p>数组</p></li>
+                <li><p>展开</p></li>
+            </ul>
+            <ul class="content-tab" style="display: none">
+                <li><p>JavaScript组成</p></li>
+                <li><p>Javascript出现的位置</p></li>
+                <li><p>提示框效果</p></li>
+                <li><p>闭包</p></li>
+                <li><p>元素属性操作</p></li>
+                <li><p>动手编写第一个js特效</p></li>
+                <li><p>引入函数</p></li>
+                <li><p>定时器应用</p></li>
+                <li><p>程序调试方法</p></li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+    var tabs = document.getElementById('tabs').getElementsByTagName('span');
+    var content = document.getElementById('content').getElementsByTagName('ul')
+
+    for (var i=0; i<tabs.length; i++) {
+        tabs[i].index = i;
+        console.log(tabs[i].index)
+        tabs[i].addEventListener('mouseover', function () {
+            this.style.backgroundColor = '#ccc';
+            this.style.color = '#000';
+            for (var j=0; j<content.length; j++) {
+                content[j].style.display = 'none';
+                content[this.index].style.display = 'block';
+            }
+        })
+        tabs[i].addEventListener('mouseout', function () {
+            this.style.backgroundColor = '#000';
+            this.style.color = '#fff';
+        })
+    }
+</script>
+</body>
+</html>

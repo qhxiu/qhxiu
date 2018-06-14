@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background-color: #000;
+            color: #fff;
+        }
+        span {
+            display: inline-block;
+            margin: 20px 20px 0 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="container" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)">
+    <span>鼠标移入改变样式,鼠标移除恢复</span>
+</div>
+
+<script>
+    function mouseOver(obj) {
+        obj.style.backgroundColor = '#fff';
+        obj.style.color = 'red';
+        obj.style.borderWidth = 5 + 'px';
+        obj.style.borderStyle = 'solid';
+        obj.style.borderColor = 'red';
+    }
+    function mouseOut(obj) {
+        obj.style.backgroundColor = '#000';
+        obj.style.color = '#fff';
+        obj.style.border = 'none';
+    }
+</script>
+</body>
+</html>

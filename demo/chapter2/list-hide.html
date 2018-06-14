@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 200px;
+            margin:0 auto;
+            background-color: #eee;
+            border: 1px solid #ccc;
+        }
+        .title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #999999;
+            cursor: pointer;
+        }
+        .title p {
+            margin: 0;
+            padding: 10px 5px;
+        }
+        .list {
+            display: none;
+            list-style-type: none;
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            margin-bottom: 3px;
+            margin-left: -10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="title" id="title">
+        <p>播放列表...</p>
+    </div>
+    <ul id="list" class="list">
+        <li><a href="">玩家之徒-蔡依林</a></li>
+        <li><a href="">原谅我就是这样的女生-戴佩妮</a></li>
+        <li><a href="">猜不透</a></li>
+        <li><a href="">了年</a></li>
+    </ul>
+</div>
+
+<script>
+    var title = document.getElementById('title');
+    var list = document.getElementById('list');
+
+    title.addEventListener('click', function () {
+        if (list.style.display === 'none') {
+            console.log(1)
+            list.style.display = 'block';
+        } else {
+            list.style.display = 'none';
+        }
+    })
+</script>
+</body>
+</html>

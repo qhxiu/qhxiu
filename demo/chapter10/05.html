@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 100px;
+            top: 100px;
+            border: 1px solid orangered;
+            background-color: #fef4eb;
+        }
+        .title {
+            height: 25px;
+            background-color: #ff6600;
+            cursor: move;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="锁定范围">
+    <input type="button" value="水平锁定">
+    <input type="button" value="垂直锁定">
+    <input type="button" value="锁定位置">
+    <p>拖放状态：<span>未开始</span></p>
+    <div id="box">
+        <h2 class="title"></h2>
+    </div>
+
+<script>
+    var $ = function (id) {return typeof id == 'string' ? document.getElementById(id) : id};
+    var $$ = function (tagName, parent) {return (parent || document).getElementsByTagName(tagName)};
+    var $$$ = function (sClass, parent) {
+        var Class = [], i = 0;
+        reClass = new RegExp("(\\s|^)" + sClass + "($|\\s)");
+        aElement = $$('*', parent);
+        for (i=0; i<aElement.length; i++) {
+            reClass.test(aElement[i].className) && (Class.push(aElement[i]));
+        }
+        return Class;
+    };
+    var Drag = function () {this.initialize.call(this, arguments)};
+    Drag.prototype = {
+        initialize: function (options) {
+            this.box = $('box');
+            this.title = $$$('title', this.box)[0];
+            this.span = $$('span')[0];
+            this.dom = document.documentElement || document.body;
+
+            this.setOptions(options);
+
+            this.limit = this.options.limit;
+            this.lock = this.options.lock;
+            this.lockX = this.options.lockX;
+            this.lockY = this.options.lockY;
+
+
+            console.log(this.lockX, this.lock);
+
+            this.box.style.left = this.box.offsetLeft + 'px';
+            this.box.style.top = this.box.offsetTop + 'px';
+
+            this.drag(this.title);
+        },
+        drag: function (obj) {
+            var that = this;
+             obj.onmousedown = function (event) {
+                 var event = event || window.event;
+                 var disX = event.clientX - that.box.offsetLeft;
+                 var disY = event.clientY - that.box.offsetTop;
+                 that.span.innerText = '拖拽开始';
+                 that.lock && (that.lockX = that.lockY = true);
+
+                 document.onmousemove = function (event) {
+                     var event = event || window.event;
+                     var iL = event.clientX - disX;
+                     var iT = event.clientY - disY;
+                     var maxL = Math.max(that.dom.clientWidth, that.dom.scrollWidth) - that.box.offsetWidth;
+                     var maxT = Math.max(that.dom.clientHeight, that.dom.scrollHeight) - that.box.offsetHeight;
+
+                     if (that.limit) {
+                         iL < 0 && (iL = 0);
+                         iT < 0 && (iT = 0);
+                         iL > maxL && (iL = maxL);
+                         iT > maxT && (iT = maxT);
+                     }
+
+                     console.log(that.lockX, that.lock);
+                     that.lockX || (that.box.style.left = iL + 'px');
+                     that.lockY || (that.box.style.top = iT + 'px');
+
+                     that.span.innerText = 'left: ' + that.box.style.left + ', top: ' + that.box.style.top;
+
+                     return false
+                 };
+
+                 document.onmouseup = function (event) {
+                     document.onmousemove = null;
+                     document.onmouseup = null;
+                     that.span.innerText = '拖拽结束';
+
+                     obj.releaseCapture && obj.releaseCapture();
+                 };
+
+                 this.setCapture && this.setCapture();
+             };
+        },
+        setOptions: function (options) {
+            this.options = {
+                limit: false,
+                lock: false,
+                lockX: false,
+                lockY: false
+            }
+        }
+    };
+    window.onload = function () {
+        var Input = $$('input');
+        var obj = new Drag({limit: false});
+
+        Input[0].onclick = function () {
+            obj.limit = !obj.limit;
+            this.value = obj.limit ? "取消锁定范围" : '锁定范围'
+        };
+        Input[1].onclick = function () {
+            obj.lockX = !obj.lockX;
+            this.value = obj.lockX ? "取消水平锁定" : "水平锁定"
+        };
+        Input[2].onclick = function () {
+            obj.lockY = !obj.lockY;
+            this.value = obj.lockY ? "取消垂直锁定" : "垂直锁定"
+        };
+        Input[3].onclick = function () {
+            obj.lock = !obj.lock;
+            console.log(obj.lock);
+            this.value = obj.lock ? "取消位置锁定" : "锁定位置"
+        }
+    }
+</script>
+</body>
+</html>

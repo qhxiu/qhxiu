@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 200px;
+            margin: 0 auto;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .box {
+            padding: 10px 10px;
+        }
+        .time {
+            display: inline-block;
+            padding: 0 5px;
+            background-color: #fff;
+            color: #000;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <span id="hour" class="time">19</span>
+        <span>点</span>
+        <span id="minute" class="time">42</span>
+        <span>分</span>
+        <span id="second" class="time">60</span>
+        <span>秒</span>
+    </div>
+</div>
+
+<script>
+
+        var now = new Date();
+        var hour = document.getElementById('hour'),
+            minute = document.getElementById('minute'),
+            second = document.getElementById('second');
+        var h = now.getHours(),
+            m = now.getMinutes(),
+            s = now.getSeconds();
+
+        hour.innerText = h;
+        minute.innerText = m;
+        second.innerText = s;
+        setInterval(function () {
+            second.innerText = parseInt(second.innerText) + 1;
+            if (second.innerText == 60) {
+                second.innerText = 0;
+                minute.innerText = parseInt(minute.innerText) + 1;
+                if (minute.innerText == 60) {
+                    minute.innerText = 0;
+                    hour.innerText = parseInt(hour.innerText) + 1;
+                    if (hour.innerText == 24) {
+                        hour.innerText = 0;
+                    }
+                }
+            }
+        }, 1000);
+
+</script>
+</body>
+</html>
