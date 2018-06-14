@@ -1,3 +1,6 @@
 [submodule "javascriptDemo"]
 	path = javascriptDemo
 	url = https://github.com/qhxiu/javascriptDemo.git
+[submodule "mi"]
+	path = mi
+	url = https://github.com/qhxiu/mi.git
