@@ -1,0 +1,6 @@
+[submodule "mi"]
+	path = mi
+	url = git@github.com:qhxiu/mi.git
+[submodule "javascriptDemo"]
+	path = javascriptDemo
+	url = git@github.com:qhxiu/javascriptDemo.git
